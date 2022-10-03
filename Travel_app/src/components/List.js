@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   CircularProgress,
   Grid,
@@ -10,38 +10,48 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 
-const List = () => {
+import PlaceDetails from "./PlaceDetails";
+
+const List = (props) => {
   const classes = useStyles();
-  const [type, setType]=useState('restaurants')
-  const [rating, setRating]=useState('')
+  const [type, setType] = useState("restaurants");
+  const [rating, setRating] = useState("");
 
-  const handleSelect=(e)=>{
-    setType(e.target.value)
-  }
+  const places = [{ name: "Best steak" }];
+  const handleSelect = (e) => {
+    setType(e.target.value);
+  };
 
-  const handleRating=()=>{
-
-  }
+  const handleRating = (e) => {
+    setRating(e.target.value);
+  };
   return (
     <div className={classes.container}>
       <Typography variant="h4"> Resturants, Hotels and Attractions</Typography>
       <FormControl className={classes.formControl}>
         <InputLabel>Type</InputLabel>
         <Select value={type} onChange={handleSelect}>
-            <MenuItem value='restaurants'>Restaurants</MenuItem>
-            <MenuItem value='hotels'>Hotels</MenuItem>
-            <MenuItem value='attractions'>Attractions</MenuItem>
+          <MenuItem value="restaurants">Restaurants</MenuItem>
+          <MenuItem value="hotels">Hotels</MenuItem>
+          <MenuItem value="attractions">Attractions</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
         <InputLabel>Rating</InputLabel>
         <Select value={rating} onChange={handleRating}>
-            <MenuItem value={0}>All</MenuItem>
-            <MenuItem value={3}>Above 3.0</MenuItem>
-            <MenuItem value={4}>Above 4.0</MenuItem>
-            <MenuItem value={4.5}>Above 4.5</MenuItem>
+          <MenuItem value={0}>All</MenuItem>
+          <MenuItem value={3}>Above 3.0</MenuItem>
+          <MenuItem value={4}>Above 4.0</MenuItem>
+          <MenuItem value={4.5}>Above 4.5</MenuItem>
         </Select>
       </FormControl>
+      <Grid container spacing={3} className={classes.list}>
+        {places.map((place, i) => (
+          <Grid item key={i} xs={12}>
+            <PlaceDetails place={props.restaurant}/>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };

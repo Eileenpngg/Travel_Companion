@@ -6,15 +6,15 @@ import GoogleMapReact from "google-map-react";
 import useStyles from "./styles";
 
 //Paper is a div with a background color
-const Map = () => {
+const Map = (props) => {
   const classes = useStyles();
-  // const isMobile = useMediaQuery("min-width:600px");
-
+  const coordinates = props.coordinates;
+  //const isMobile = useMediaQuery("min-width:600px");
   //Coordinates to be shown on google map
   //Defaultcenter is the center of the map
   //margin accepts an array of 4 different propoerites, top, right, bottom , left
-  //functioni in onChildClick will run when a restaurant is clicked
-  const coordinates = { lat: 0, lng: 0 };
+  //function in onChildClick will run when a restaurant is clicked
+
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
@@ -24,7 +24,10 @@ const Map = () => {
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
         // options={""}
-        // onChange={""}
+        onChange={(e) => {
+          props.setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+          props.setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+        }}
         // onChildClick={""}
       ></GoogleMapReact>
     </div>
