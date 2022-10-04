@@ -15,7 +15,7 @@ const getRestaurants = async (bounds) => {
       params: {
         bl_latitude: bounds.sw.lat,
         tr_latitude: bounds.ne.lat,
-        bl_longitude: bounds.ne.lng,
+        bl_longitude: bounds.sw.lat,
         tr_longitude: bounds.ne.lng,
       },
       headers: {
