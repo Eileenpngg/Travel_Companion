@@ -14,29 +14,26 @@ import PlaceDetails from "../Places/PlaceDetails";
 
 const List = (props) => {
   const classes = useStyles();
-  const [type, setType] = useState("restaurants");
-  const [rating, setRating] = useState("");
   const [elRef, setElRef] = useState([]);
   console.log(props.childClicked);
 
-  // //Passes the index of current index to placeDetails
+  //Passes the index of current index to placeDetails
   useEffect(() => {
     if (props.places) {
       const refs = Array(props.places.length)
         .fill()
         .map((_, i) => elRef[i] || createRef());
       setElRef(refs);
-      console.log(elRef);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.places]);
 
   const handleSelect = (e) => {
-    setType(e.target.value);
+    props.setType(e.target.value);
   };
 
   const handleRating = (e) => {
-    setRating(e.target.value);
+    props.setRating(e.target.value);
   };
   return (
     <div className={classes.container}>
@@ -49,7 +46,7 @@ const List = (props) => {
         <>
           <FormControl className={classes.formControl}>
             <InputLabel>Type</InputLabel>
-            <Select value={type} onChange={handleSelect}>
+            <Select value={props.type} onChange={handleSelect}>
               <MenuItem value="restaurants">Restaurants</MenuItem>
               <MenuItem value="hotels">Hotels</MenuItem>
               <MenuItem value="attractions">Attractions</MenuItem>
@@ -57,7 +54,7 @@ const List = (props) => {
           </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel>Rating</InputLabel>
-            <Select value={rating} onChange={handleRating}>
+            <Select value={props.rating} onChange={handleRating}>
               <MenuItem value={0}>All</MenuItem>
               <MenuItem value={3}>Above 3.0</MenuItem>
               <MenuItem value={4}>Above 4.0</MenuItem>
@@ -67,6 +64,7 @@ const List = (props) => {
           <Grid container spacing={3} className={classes.list}>
             {props.places?.map((place, i) => (
               <Grid ref={elRef[i]} item key={i} xs={12}>
+
                 {/* If the child clicked's index === to the index of the places mapped */}
                 <PlaceDetails
                   place={place}

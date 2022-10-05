@@ -27,7 +27,6 @@ const PlaceDetails = (props) => {
   };
   useEffect(() => {
     if (props.selected) {
-      console.log(props.refProp);
       props.refProp?.current?.scrollIntoView({
         behavior: "smooth",
         block: "start",

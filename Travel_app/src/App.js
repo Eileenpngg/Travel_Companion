@@ -14,6 +14,8 @@ const App = () => {
   const [coordinates, setCoordinates] = useState();
   const [bounds, setBounds] = useState({});
   const [childClicked, setChildClicked] = useState(null);
+  const [type, setType] = useState("restaurants");
+  const [rating, setRating] = useState("");
   //gets the user coordinates when the app is first launched
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,11 +30,11 @@ const App = () => {
   //gets the data of the restaurants when the map moves
   useEffect(() => {
     setIsLoading(true);
-    getRestaurants(bounds).then((data) => {
+    getRestaurants(bounds, type).then((data) => {
       setIsLoading(false);
       setPlaces(data);
     });
-  }, [coordinates, bounds]);
+  }, [coordinates, bounds, type]);
 
   return (
     <>
@@ -45,6 +47,10 @@ const App = () => {
             places={places}
             childClicked={childClicked}
             isLoading={isLoading}
+            type={type}
+            setType={setType}
+            rating={rating}
+            setRating={setRating}
           />
         </Grid>
         <Grid item xs={12} md={8}>
