@@ -2,7 +2,7 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 // import LocationOnOutlined from "@material-ui/icons/LocationOnOutlined";
-import useStyles from "./styles";
+import useStyles from "../Map/styles";
 
 //Paper is a div with a background color
 const Map = (props) => {
@@ -14,6 +14,9 @@ const Map = (props) => {
   //margin accepts an array of 4 different propoerites, top, right, bottom , left
   //function in onChildClick will run when a restaurant is clicked
 
+  const handlechildClick = (index) => {
+    props.setChildClicked(index);
+  };
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
@@ -27,7 +30,7 @@ const Map = (props) => {
           props.setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           props.setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        onChildClick={(child)=>{props.setChildClicked(child)}}
+        onChildClick={handlechildClick}
       >
         {/* Displays the places on the map based on their coordinates */}
         {props.places?.map((place, i) => (

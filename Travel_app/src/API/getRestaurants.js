@@ -19,8 +19,8 @@ const getRestaurants = async (bounds) => {
         tr_longitude: bounds.ne.lng,
       },
       headers: {
-        // "X-RapidAPI-Key": "64d5222b63msh3874965502817b4p16526cjsn8acd6fab924c",
-        // "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+        "X-RapidAPI-Key": "64d5222b63msh3874965502817b4p16526cjsn8acd6fab924c",
+        "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
       },
     });
     return data;

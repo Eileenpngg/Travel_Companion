@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -25,6 +25,15 @@ const PlaceDetails = (props) => {
   const handleClick = () => {
     setOpenWeb(false);
   };
+  useEffect(() => {
+    if (props.selected) {
+      console.log(props.refProp);
+      props.refProp?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [props.selected]);
   return (
     <Card elevation={6}>
       <CardMedia

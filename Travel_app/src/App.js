@@ -13,8 +13,10 @@ const App = () => {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState();
   const [bounds, setBounds] = useState({});
-  const [childClicked, setChildClicked]= useState(null)
+  const [childClicked, setChildClicked] = useState(null);
   //gets the user coordinates when the app is first launched
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
@@ -25,9 +27,9 @@ const App = () => {
 
   //gets the data of the restaurants when the map moves
   useEffect(() => {
-    console.log(bounds);
+    setIsLoading(true);
     getRestaurants(bounds).then((data) => {
-      console.log(data);
+      setIsLoading(false);
       setPlaces(data);
     });
   }, [coordinates, bounds]);
@@ -36,10 +38,14 @@ const App = () => {
     <>
       <CssBaseline />
       <Search />
-      <Grid container spacing={3} style={{ width: "100%" }}>
+      <Grid container spacing={3} style={{ width: "100%", overflowY: 'unset', }}>
         {/* shows full width on mobile devices and 4 spaces in medium and larger devices*/}
         <Grid item xs={12} md={4}>
-          <List places={places} setChildClicked={childClicked}/>
+          <List
+            places={places}
+            childClicked={childClicked}
+            isLoading={isLoading}
+          />
         </Grid>
         <Grid item xs={12} md={8}>
           <Map
