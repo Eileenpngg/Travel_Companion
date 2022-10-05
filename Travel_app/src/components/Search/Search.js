@@ -3,7 +3,7 @@ import React from "react";
 import { AppBar, Toolbar, Typography, InputBase, Box } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-import useStyles from "./Map/styles";
+import useStyles from "../Map/styles";
 // Appbar is the same as a NavBar
 //Typography is every single text element
 //Box is a div but you can set the display etc.

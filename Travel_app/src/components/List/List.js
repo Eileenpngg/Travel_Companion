@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, createRef} from "react";
 import {
   CircularProgress,
   Grid,
@@ -8,14 +8,22 @@ import {
   FormControl,
   Select,
 } from "@material-ui/core";
-import useStyles from "./Map/styles";
+import Rating from "@material-ui/lab";
+import useStyles from "../Map/styles";
+import PlaceDetails from "../Places/PlaceDetails";
 
-import PlaceDetails from "./Places/PlaceDetails";
+
 
 const List = (props) => {
   const classes = useStyles();
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
+
+  const[ref, setRef]=useState([])
+  //
+  useEffect(()=>{
+    const refs=Array(props.places.length).fill().map((_,i)=>)
+  },[props.places])
 
   const handleSelect = (e) => {
     setType(e.target.value);
@@ -45,7 +53,7 @@ const List = (props) => {
         </Select>
       </FormControl>
       <Grid container spacing={3} className={classes.list}>
-        {props.restaurants?.map((place, i) => (
+        {props.places?.map((place, i) => (
           <Grid item key={i} xs={12}>
             <PlaceDetails place={place} />
           </Grid>
