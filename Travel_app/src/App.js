@@ -40,9 +40,9 @@ const App = () => {
     <>
       <CssBaseline />
       <Search />
-      <Grid container spacing={3} style={{ width: "100%", overflowY: 'unset', }}>
+      <Grid container spacing={3} style={{ width: "100%", overflowY: "unset" }} direction="row">
         {/* shows full width on mobile devices and 4 spaces in medium and larger devices*/}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={12}>
           <List
             places={places}
             childClicked={childClicked}
@@ -53,7 +53,7 @@ const App = () => {
             setRating={setRating}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={12}>
           <Map
             coordinates={coordinates}
             setCoordinates={setCoordinates}

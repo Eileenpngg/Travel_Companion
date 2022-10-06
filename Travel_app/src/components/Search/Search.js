@@ -11,7 +11,7 @@ import useStyles from "../Map/styles";
 const Search = () => {
   const classes = useStyles();
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ backgroundColor: "grey" }}>
       <Toolbar className={classes.toolbar}>
         <Typography variant="h5" className={classes.title}>
           Travel Companion

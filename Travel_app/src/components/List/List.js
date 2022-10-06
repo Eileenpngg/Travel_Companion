@@ -61,10 +61,14 @@ const List = (props) => {
               <MenuItem value={4.5}>Above 4.5</MenuItem>
             </Select>
           </FormControl>
-          <Grid container spacing={3} className={classes.list}>
+          <Grid
+            container
+            spacing={3}
+            className={classes.list}
+            direction="column"
+          >
             {props.places?.map((place, i) => (
               <Grid ref={elRef[i]} item key={i} xs={12}>
-
                 {/* If the child clicked's index === to the index of the places mapped */}
                 <PlaceDetails
                   place={place}

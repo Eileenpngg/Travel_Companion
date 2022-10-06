@@ -33,6 +33,7 @@ const PlaceDetails = (props) => {
       });
     }
   }, [props.selected]);
+
   return (
     <Card elevation={6}>
       <CardMedia
@@ -41,7 +42,7 @@ const PlaceDetails = (props) => {
           props.place.photo ? (
             props.place.photo.images.large.url
           ) : (
-            <h1>Image Not Available</h1>
+            null
           )
         }
         title={props.place.name}

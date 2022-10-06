@@ -1,4 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { createTheme, makeStyles } from "@material-ui/core/styles";
+let theme = createTheme();
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     height: "75vh",
-    overflow: "auto",
+    overflowX: "auto",
+    display: "flex",
   },
 }));
 
