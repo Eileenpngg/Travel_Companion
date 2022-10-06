@@ -12,7 +12,7 @@ import getRestaurants from "./API/getRestaurants";
 const App = () => {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState();
-  const [bounds, setBounds] = useState({});
+  const [bounds, setBounds] = useState("");
   const [childClicked, setChildClicked] = useState(null);
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("");
@@ -28,15 +28,17 @@ const App = () => {
     );
   }, []);
 
-  //gets the data of the restaurants when the map moves
+  //gets the data of the restaurants when the map moves and only when the longitutude an latitude is available
   useEffect(() => {
-    setIsLoading(true);
-    getRestaurants(bounds, type).then((data) => {
-      setIsLoading(false);
-      setPlaces(data);
-      setFilteredPlaces([])
-    });
-  }, [coordinates, bounds, type]);
+    if (bounds) {
+      setIsLoading(true);
+      getRestaurants(bounds, type).then((data) => {
+        setIsLoading(false);
+        setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
+        setFilteredPlaces([]);
+      });
+    }
+  }, [bounds, type]);
 
   //filters the place by returning places with a rating above the selected value
   useEffect(() => {
@@ -47,7 +49,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <Search setCoordinates={setCoordinates}/>
+      <Search setCoordinates={setCoordinates} />
       <Grid
         container
         spacing={3}
