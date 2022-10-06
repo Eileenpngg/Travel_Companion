@@ -47,7 +47,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <Search />
+      <Search setCoordinates={setCoordinates}/>
       <Grid
         container
         spacing={3}
