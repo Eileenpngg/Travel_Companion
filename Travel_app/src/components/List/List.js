@@ -15,7 +15,6 @@ import PlaceDetails from "../Places/PlaceDetails";
 const List = (props) => {
   const classes = useStyles();
   const [elRef, setElRef] = useState([]);
-  console.log(props.childClicked);
 
   //Passes the index of current index to placeDetails
   useEffect(() => {

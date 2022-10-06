@@ -18,7 +18,8 @@ const App = () => {
   const [rating, setRating] = useState("");
   //gets the user coordinates when the app is first launched
   const [isLoading, setIsLoading] = useState(false);
-
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
+  //Gets the current position of the user on mount
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
@@ -33,18 +34,30 @@ const App = () => {
     getRestaurants(bounds, type).then((data) => {
       setIsLoading(false);
       setPlaces(data);
+      setFilteredPlaces([])
     });
   }, [coordinates, bounds, type]);
+
+  //filters the place by returning places with a rating above the selected value
+  useEffect(() => {
+    const filterPlaces = places.filter((place) => place.rating > rating);
+    setFilteredPlaces(filterPlaces);
+  }, [rating]);
 
   return (
     <>
       <CssBaseline />
       <Search />
-      <Grid container spacing={3} style={{ width: "100%", overflowY: "unset" }} direction="row">
+      <Grid
+        container
+        spacing={3}
+        style={{ width: "100%", overflowY: "unset" }}
+        direction="row"
+      >
         {/* shows full width on mobile devices and 4 spaces in medium and larger devices*/}
         <Grid item xs={12} md={12}>
           <List
-            places={places}
+            places={filteredPlaces.length ? filteredPlaces : places} //use a ternary operator so that only when the user selects a rating, the filtered places will show, otherwise, it will show the places
             childClicked={childClicked}
             isLoading={isLoading}
             type={type}
@@ -58,7 +71,7 @@ const App = () => {
             coordinates={coordinates}
             setCoordinates={setCoordinates}
             setBounds={setBounds}
-            places={places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             setChildClicked={setChildClicked}
           />
         </Grid>
