@@ -17,12 +17,13 @@ const List = (props) => {
   const [elRef, setElRef] = useState([]);
 
   //Passes the index of current index to placeDetails
+  //Everytime the places change, 
   useEffect(() => {
     if (props.places) {
-      const refs = Array(props.places.length)
+      const refs = Array(props.places.length) //constructs the number of element depending on the no. of places and fill the array
         .fill()
-        .map((_, i) => elRef[i] || createRef());
-      setElRef(refs);
+        .map((_, i) => elRef[i] || createRef()); //Map the array and takes the index of the reference or if its not created, a ref will be created
+      setElRef(refs); //put the refs in a state
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.places]);
@@ -66,9 +67,12 @@ const List = (props) => {
             className={classes.list}
             direction="column"
           >
-            {props.places?.map((place, i) => (
+        {/*  As the places are being map through, you can pass in the reference you created 
+        above and access it based on the index of the element that is currently mapped through */}
+            {props.places?.map((place, i) => ( 
               <Grid ref={elRef[i]} item key={i} xs={12}>
-                {/* If the child clicked's index === to the index of the places mapped */}
+                {/* A prop of 'selected is passed through and if the child clicked's index === to the 
+                index of the places mapped */}
                 <PlaceDetails
                   place={place}
                   selected={Number(props.childClicked) === i}

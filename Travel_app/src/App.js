@@ -19,6 +19,7 @@ const App = () => {
   //gets the user coordinates when the app is first launched
   const [isLoading, setIsLoading] = useState(false);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
+  
   //Gets the current position of the user on mount
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(

@@ -25,9 +25,11 @@ const PlaceDetails = (props) => {
   const handleClick = () => {
     setOpenWeb(false);
   };
+  //If child clicked, it will then access the index and scroll into view
+  //Similar to useRef, createRef has a current property. 
   useEffect(() => {
     if (props.selected) {
-      props.refProp?.current?.scrollIntoView({
+      props.refProp?.current?.scrollIntoView({ 
         behavior: "smooth",
         block: "start",
       });

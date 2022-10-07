@@ -3,7 +3,7 @@ import { Autocomplete } from "@react-google-maps/api";
 import { AppBar, Toolbar, Typography, InputBase, Box } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-import useStyles from "../Map/styles";
+import useStyles from "./styles";
 // Appbar is the same as a NavBar
 //Typography is every single text element
 //Box is a div but you can set the display etc.
@@ -26,18 +26,21 @@ const Search = (props) => {
   return (
     <AppBar position="static" style={{ backgroundColor: "grey" }}>
       <Toolbar className={classes.toolbar}>
-        <Typography variant="h5" className={classes.title}>
+        <Typography
+          variant="h5"
+          className={classes.title}
+          sx={{ fontWeight: "bold" }}
+        >
           Travel Companion
         </Typography>
         <Box display="flex">
           <Typography variant="h6" className={classes.title}>
             Find new places
           </Typography>
+          <SearchIcon />
           <Autocomplete onLoad={onLoad} onPlaceChanged={onChange}>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
+              <div className={classes.searchIcon}></div>
               <InputBase
                 placeholder="Search..."
                 classes={{ root: classes.inputRoot, input: classes.InputInput }}
