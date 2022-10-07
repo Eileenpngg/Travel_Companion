@@ -16,7 +16,7 @@ import { Rating } from "@material-ui/lab";
 import useStyles from "../Map/styles";
 
 //Modals
-import Web from "../Modals/Web";
+import Web from "../Modal/Web";
 
 const PlaceDetails = (props) => {
   const classes = useStyles();
@@ -25,6 +25,7 @@ const PlaceDetails = (props) => {
   const handleClick = () => {
     setOpenWeb(false);
   };
+  
   //If child clicked, it will then access the index and scroll into view
   //Similar to useRef, createRef has a current property. 
   useEffect(() => {
